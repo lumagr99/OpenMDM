@@ -111,3 +111,6 @@ crashlytics-build.properties
 .idea
 
 common/local/settings.py
+
+# Data directory
+data/

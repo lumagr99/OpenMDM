@@ -45,17 +45,19 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'bootstrapform',
     'public_gate',
+    'django_forms_bootstrap',
+    'django_admin_bootstrapped',
 )
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-)
+]
 
 AUTHENTICATION_BACKENDS = (
     'django_auth_ldap.backend.LDAPBackend',
@@ -99,9 +101,22 @@ STATICFILES_DIRS = (
 )
 
 
-TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, 'templates'),
-)
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
 
 # plist group
 
@@ -123,4 +138,4 @@ AUTH_LDAP_GROUP_SEARCH = CONFIG['local']['ldap']['GROUP_SEARCH']
 AUTH_LDAP_GROUP_TYPE = CONFIG['local']['ldap']['GROUP_TYPE']
 AUTH_LDAP_REQUIRE_GROUP = CONFIG['local']['ldap']['REQUIRE_GROUP']
 
-connect(CONFIG['local']['mongo']['DB'])
+connect(CONFIG['local']['mongo']['DB'], host='mongodb', port=27017)

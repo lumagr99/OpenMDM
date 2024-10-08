@@ -1,4 +1,4 @@
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
@@ -108,8 +108,10 @@ def property_lists_for_user(request):
         groups = request.user.ldap_user.group_names
     else:
         groups = {request.user.ldap_user.attrs['gidnumber'][0]}
+    print("Gruppen des Benutzers", groups)
     for group in groups:
         plists = Recipe.objects(group_name=group)
+        print("Plists", plists)
         if len(plists) > 0:
             for plist in plists:
                 plist.id = str(plist.id)
