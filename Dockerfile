@@ -1,11 +1,11 @@
 FROM ubuntu:20.04
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Update der Paketliste und Installation von Python 3.8 und curl
+# Update der Paketliste und Installation von Python 3.9 und curl
 RUN apt-get update && apt-get install -y \
-    python3.8 \
-    python3.8-dev \
-    python3.8-distutils \
+    python3.9 \
+    python3.9-dev \
+    python3.9-distutils \
     build-essential \
     curl \
     gnupg \
@@ -17,9 +17,12 @@ RUN apt-get update && apt-get install -y \
     libldap2-dev \
     libsasl2-dev
 
-# Lade das get-pip.py-Skript herunter und installiere pip für Python 3.8
+# Setze Python 3.9 als Standardversion für 'python3'
+RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.9 1
+
+# Lade das get-pip.py-Skript herunter und installiere pip für Python 3.9
 RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
-    python3.8 get-pip.py && \
+    python3 get-pip.py && \
     rm get-pip.py
 
 # Aufräumen von APT-Caches
@@ -45,7 +48,7 @@ RUN pip3 install --no-cache-dir \
     django-auth-ldap==2.2.0 \
     python-ldap \
     pymongo==3.11.0 \
-    mongoengine==0.21.0 
+    mongoengine==0.21.0
 
 # Kopiere das Initialisierungsskript für MongoDB
 COPY init-mongo.js /docker-entrypoint-initdb.d/
