@@ -15,7 +15,7 @@ then
 fi
 CHECK_VERSION=$(${PYTHON3_PATH} -c 'import sys; print(sys.version_info[:2])' 2>/dev/null)
 
-if [ "${CHECK_VERSION}" != "(3, 11)" ]
+if [ "${CHECK_VERSION}" != "(3, 12)" ]
 then
     echo "Python version: ${CHECK_VERSION}"
     echo  "Invalid Python interpreter, version 3.4 required"

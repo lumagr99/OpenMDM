@@ -1,15 +1,15 @@
 FROM ubuntu:20.04
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Update der Paketliste und Installation von Python 3.11 und curl
+# Update der Paketliste und Installation von Python 3.12 und curl
 RUN apt-get update && apt-get install -y \
     software-properties-common && \
     add-apt-repository ppa:deadsnakes/ppa && \
     apt-get update && \
     apt-get install -y \
-    python3.11 \
-    python3.11-dev \
-    python3.11-distutils \
+    python3.12 \
+    python3.12-dev \
+    python3.12-distutils \
     build-essential \
     curl \
     gnupg \
@@ -21,12 +21,12 @@ RUN apt-get update && apt-get install -y \
     libldap2-dev \
     libsasl2-dev
 
-# Setze Python 3.11 als Standardversion für 'python3'
-RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 1
+# Setze Python 3.12 als Standardversion für 'python3'
+RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.12 1
 
-# Lade das get-pip.py-Skript herunter und installiere pip für Python 3.11
+# Lade das get-pip.py-Skript herunter und installiere pip für Python 3.12
 RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
-    python3 get-pip.py && \
+    python3.12 get-pip.py && \
     rm get-pip.py
 
 # Aufräumen von APT-Caches
@@ -49,7 +49,7 @@ RUN chmod +x configure.sh
 
 # Installiere benötigte Python-Pakete mit pip
 RUN pip3 install --no-cache-dir \
-    setuptools==57.5.0 \
+    setuptools \
     mysqlclient==2.1.0 \
     django==2.2.7 \
     django-bootstrap4 \
