@@ -114,3 +114,6 @@ common/local/settings.py
 
 # Data directory
 data/
+
+# Docker image
+openmdm.tar
