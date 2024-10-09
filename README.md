@@ -1,4 +1,4 @@
-This project makes it possible to start the OpenMDM project with Python 3.8.
+This project makes it possible to start the OpenMDM project with Python 3.8 and as a docker container.
 
 To begin with, an organizational structure must be defined in OpenLDAP. An example structure can be found in the example.ldif file. The system should then be restarted.
 
