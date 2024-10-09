@@ -1,15 +1,15 @@
 FROM ubuntu:20.04
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Update der Paketliste und Installation von Python 3.10 und curl
+# Update der Paketliste und Installation von Python 3.11 und curl
 RUN apt-get update && apt-get install -y \
     software-properties-common && \
     add-apt-repository ppa:deadsnakes/ppa && \
     apt-get update && \
     apt-get install -y \
-    python3.10 \
-    python3.10-dev \
-    python3.10-distutils \
+    python3.11 \
+    python3.11-dev \
+    python3.11-distutils \
     build-essential \
     curl \
     gnupg \
@@ -21,10 +21,10 @@ RUN apt-get update && apt-get install -y \
     libldap2-dev \
     libsasl2-dev
 
-# Setze Python 3.10 als Standardversion für 'python3'
-RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.10 1
+# Setze Python 3.11 als Standardversion für 'python3'
+RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 1
 
-# Lade das get-pip.py-Skript herunter und installiere pip für Python 3.10
+# Lade das get-pip.py-Skript herunter und installiere pip für Python 3.11
 RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
     python3 get-pip.py && \
     rm get-pip.py
